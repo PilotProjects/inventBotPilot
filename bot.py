@@ -27,8 +27,8 @@ def getMessage():
 @server.route("/")
 def webhook():
 	bot.remove_webhook()
-	bot.set_webhook(url="")
-#@bot.message_handler(commands=['Назад'])
-#def
+	bot.set_webhook(url="https://iventbot.herokuapp.com/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
+	return "!", 200
 
-bot.polling(none_stop=True, interval=0)
+
+server.run(host="0.0.0.0", port=os.environ.get('PORT',5000))
