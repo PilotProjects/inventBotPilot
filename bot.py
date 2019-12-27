@@ -2,45 +2,26 @@
 import os
 import telebot
 from telebot import types
+from flask import Flask, request
 
 
 
 
 TOKEN = "920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y"
 bot = telebot.TeleBot(TOKEN)
+server = Flask(__name__)
 
-@bot.message_handler(commands=["start"])
-def start(m):
-    msg = bot.send_message(m.chat.id, "Вас приветствует Бот инвентаризации")
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(types.KeyboardButton('Найти меня', request_location=True))
-    keyboard.add(types.KeyboardButton('Инвентаризация'))
-    keyboard.add(types.KeyboardButton('Инструкции'))
-    
-    bot.send_message(m.chat.id, 'Для начала, давайте определм ваш адрес',
-        reply_markup=keyboard)
-    bot.register_next_step_handler(msg, name)
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, message.from_user.first_name + ', я вас категорически приветствую')
 
+@bot.message_handler(func=lambda message: True, content_types=['text'])
+def name(message):
+    bot.reply_to(message,message.text)
 
-def name(m):
-    if m.text == 'Местоположение':
-        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(advert) for advert in ['Верно']])
-        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
-        bot.send_message(m.chat.id, 'Ваше местоположение',
-            reply_markup=keyboard)
-    elif m.text == 'Инвентаризация':
-        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(advert) for advert in ['Маршрутизатор', 'ТВ-приставка']])
-        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
-        bot.send_message(m.chat.id, 'Веберите и сфотографируйте оборудование',
-            reply_markup=keyboard)
-    elif m.text == 'Инструкции':
-        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
-        bot.send_message(m.chat.id, 'Сделай всё отлично',
-            reply_markup=keyboard)
-
+@server.route("/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y", methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.bot])
 #@bot.message_handler(commands=['Назад'])
 #def
 
