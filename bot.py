@@ -30,10 +30,10 @@ def start(message):
 def name(message):
     bot.reply_to(message,message.text)
 
-@server.route("/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+#@server.route("/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y", methods=['POST'])
+#def getMessage():
+#    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+#    return "!", 200
 
 @server.route("/")
 def webhook():
@@ -42,4 +42,4 @@ def webhook():
 	return "!", 200
 
 
-server.run(host="127.0.0.1", port=os.environ.get('PORT'))
+server.run(host="0.0.0.0", port=os.environ.get('PORT'))
