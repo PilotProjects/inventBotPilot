@@ -3,18 +3,18 @@ import os
 import telebot
 from telebot import types
 from flask import Flask, request
-import dj_database_url
-import psycorg
+#import dj_database_url
+#import psycorg
 
-DATABASELINK = "postgress://tolwlqcvqtkwlm:dc04a811d45709f407be52ed65f92099f60feaa9a422e4638132816dd9023331@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com:5432/dcdkaur1106ah5"
+#DATABASELINK = "postgress://tolwlqcvqtkwlm:dc04a811d45709f407be52ed65f92099f60feaa9a422e4638132816dd9023331@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com:5432/dcdkaur1106ah5"
 
-db_info = dj_database_url.config(default=DATABASELINK)
-connection = psycorg2.connect(database=db_info.get('NAME'),
-	user=db_info.get('USER'),
-	password=db_info.get('PASSWORD'),
-	host=db_info.get('HOST'),
-	port=db_info.get('PORT'))
-cursor = connection.cursor()
+#db_info = dj_database_url.config(default=DATABASELINK)
+#connection = psycorg2.connect(database=db_info.get('NAME'),
+#	user=db_info.get('USER'),
+#	password=db_info.get('PASSWORD'),
+#	host=db_info.get('HOST'),
+#	port=db_info.get('PORT'))
+#cursor = connection.cursor()
 
 
 
@@ -42,4 +42,4 @@ def webhook():
 	return "!", 200
 
 
-server.run(host="0.0.0.0", port=os.environ.get('PORT',5000))
+server.run(host="127.0.0.1", port=os.environ.get('PORT'))
