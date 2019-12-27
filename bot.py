@@ -21,7 +21,13 @@ def name(message):
 
 @server.route("/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y", methods=['POST'])
 def getMessage():
-    bot.process_new_updates([telebot.bot])
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+@server.route("/")
+def webhook():
+	bot.remove_webhook()
+	bot.set_webhook(url="")
 #@bot.message_handler(commands=['Назад'])
 #def
 
