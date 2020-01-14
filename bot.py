@@ -26,7 +26,7 @@ keyboard1 = ReplyKeyboardMarkup(resize_keyboard=True).add(button_location)
 
 # Обработчик команд '/start' и '/help'.
 @bot.message_handler(commands=['start'])
-def handle_start_help(message):
+async def handle_start_help(message):
     await message.reply("старт", reply_markup=kb.keyboard1)
 
  # Обработчик для документов и аудиофайлов
