@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #import telebot
-from telebot import 
+from telebot import *
 
-bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
+bot = TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
 
 #клавиши
 button_location = KeyboardButton('Отправить местоположение')
