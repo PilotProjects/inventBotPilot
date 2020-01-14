@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 import telebot
 
-
 bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
+
+#клавиши
+button_location = KeyboardButton('Отправить местоположение')
+button_pre_inst = KeyboardButton('Стартовый отчет')
+button_post_inst = KeyboardButton('Финальный отчет')
+
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     if message.text == "Hi":
@@ -16,10 +21,12 @@ def handle_text(message):
 
 bot.polling(none_stop=True, interval=0)
 
+keyboard1 = ReplyKeyboardMarkup(resize_keyboard=True).add(button_location)
+
 # Обработчик команд '/start' и '/help'.
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['start'])
 def handle_start_help(message):
-    pass
+    await message.reply("старт", reply_markup=kb.keyboard1)
 
  # Обработчик для документов и аудиофайлов
 @bot.message_handler(content_types=['document', 'audio'])
