@@ -26,4 +26,4 @@ def handle_start_help(message):
 def handle_document_audio(message):
     pass
 
-bot.polling(none_stop=True, interval=0)
+bot.polling(none_stop=True, interval=5)
