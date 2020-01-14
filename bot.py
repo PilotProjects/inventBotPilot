@@ -1,33 +1,29 @@
 # -*- coding: utf-8 -*-
-import os
 import telebot
-from telebot import types
-from flask import Flask, request
 
 
+bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
+@bot.message_handler(content_types=["text"])
+def handle_text(message):
+    if message.text == "Hi":
+        bot.send_message(message.from_user.id, "Hello! I am HabrahabrExampleBot. How can i help you?")
 
-TOKEN = "920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y"
-bot = telebot.TeleBot(TOKEN)
-server = Flask(__name__)
+    elif message.text == "How are you?" or message.text == "How are u?":
+        bot.send_message(message.from_user.id, "I'm fine, thanks. And you?")
 
-@bot.message_handler(commands=['start'])
-def start(message):
-    bot.reply_to(message, message.from_user.first_name + ', я вас fкатегорически приветствую')
+    else:
+        bot.send_message(message.from_user.id, "Sorry, i dont understand you.")
 
-@bot.message_handler(func=lambda message: True, content_types=['text'])
-def name(message):
-    bot.reply_to(message,message.text)
+bot.polling(none_stop=True, interval=0)
 
-@server.route("/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+# Обработчик команд '/start' и '/help'.
+@bot.message_handler(commands=['start', 'help'])
+def handle_start_help(message):
+    pass
 
-@server.route("/")
-def webhook():
-	bot.remove_webhook()
-	bot.set_webhook(url="https://iventbot.herokuapp.com/920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
-	return "!", 200
+ # Обработчик для документов и аудиофайлов
+@bot.message_handler(content_types=['document', 'audio'])
+def handle_document_audio(message):
+    pass
 
-
-server.run(host="0.0.0.0", port=os.environ.get('PORT'))
+bot.polling(none_stop=True, interval=0)
