@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test api</title>
+
+</head>
+<body>
+<button id="button_1">PRESS me</button>
+	<script>
+
+	button_1.onclick = function(){
+		console.log('10');
+
+	var xhr = new XMLHttpRequest;
+	url = 'https://geocoder.ls.hereapi.com/search/6.2/geocode.json?languages=ru-RU&maxresults=4&searchtext=%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81,%D0%9A%D0%B0%D1%80%D0%BB%D0%B0+%D0%9B%D0%B8%D0%B1%D0%BA%D1%85%D0%BD%D0%B5%D1%82%D0%B0,206%D0%BA&apiKey=DYBIQkgE4dL9oNqJ4ikhiNghlpJsOj4sYaW90kDXHMA'
+
+	var req = new XMLHttpRequest;
+	url1 = 'https://image.maps.ls.hereapi.com/mia/1.6/stat?apiKey=DYBIQkgE4dL9oNqJ4ikhiNghlpJsOj4sYaW90kDXHMA&o0=65,25;50&o1=60,25;10&o2=62.25,25.7;25&tx0=xy.200,80;Oulu&tx1=62.25,25.7;Jyväskylä'
+
+	url2 = 'https://image.maps.ls.hereapi.com/mia/1.6/heat?apiKey=DYBIQkgE4dL9oNqJ4ikhiNghlpJsOj4sYaW90kDXHMA&a0=49.250327,-123.182144&rad0=3k&l0=0&a1=49.250327,-123.182144&rad1=2k&l1=1&a2=49.250327,-123.182144&rad2=1500&l2=2&a3=49.250327,-123.182144&rad3=1k&l3=3&a4=49.21984,-123.150902&rad4=2k&l4=0&a5=49.21984,-123.150902&rad5=1k&l5=1&a6=49.249207,-123.127899&rad6=2k&l6=0&a7=49.249207,-123.127899&rad7=500&l7=3&z=11&h=200&op=55'
+
+	xhr.open('GET', url, true);
+	xhr.onreadystatechange = function() {
+ 		if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			var response = xhr.responseText;
+			var parsed = JSON.parse(response);
+			console.log(response);
+			console.log(parsed.Response.View[0].Result[0].Location.DisplayPosition);
+}}}
+
+
+
+	req.open('GET', url2, true);
+	req.onreadystatechange = function() {
+ 		if (req.readyState == 4) {
+		if (req.status == 200) {
+			var res = req.responseText;
+			console.log(res);
+			var newImg = document.createElement("img");
+			newImg.src = url2;
+
+			my_div = document.getElementById("button_1");
+    		document.body.insertBefore(newImg, my_div);
+
+
+}}}
+
+	xhr.send(null);
+	req.send(null);
+
+}
+
+</script>
+</body>
+</html>

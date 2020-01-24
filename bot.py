@@ -45,9 +45,9 @@ def main_menu(message):
     send = bot.send_message(message.chat.id, "Выберите вариант: ", reply_markup=inlineKey)
     send = bot.send_message(message.chat.id, "==================", reply_markup=key)
 
-    tracking_menu[str(message.chat.id)]['posision']=gap
-    with open('tracking_menu.json', 'w') as file:
-        json.dump(tracking_menu, file)
+    # tracking_menu[str(message.chat.id)]['posision']=gap
+    # with open('tracking_menu.json', 'w') as file:
+    #     json.dump(tracking_menu, file)
 
 
 
