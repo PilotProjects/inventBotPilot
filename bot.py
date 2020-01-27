@@ -117,7 +117,7 @@ def handle_photo(message):
     file_info = bot.get_file(message.photo[len(message.photo)-1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
 
-    src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+file_info.file_path;
+    src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+file_info.file_path+" user_id "+str(message.from_user.id)
     with open(src, 'wb') as new_file:
        new_file.write(downloaded_file)
 
