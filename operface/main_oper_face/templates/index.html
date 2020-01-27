@@ -11,12 +11,10 @@
    <div class="flex-box">
      <div class="user-list">
        <ul>
-         <li><a href="#">Семен Семёнович</a></li>
-         <li><a href="#">Пётр Петрович</a></li>
-         <li><a href="#">Лев Львович</a></li>
-         <li><a href="#">Иван Колыван</a></li>
-         <li><a href="#">Сергей Гей</a></li>
-         <li><a href="#">Лупа Пупа</a></li>
+
+				 {% for Instalator in Instalator_info %}
+         <li><a href="#">{{Instalator.name}}</a></li>
+				 {% endfor %}
 
        </ul>
      </div>
@@ -24,12 +22,11 @@
    <div class="flex-box">
      <div class="inst-list">
 			 <ul>
-       <li><a href="#">#546278: 24.01.2020</a></li>
-       <li><a href="#">#546278: 24.01.2020</a></li>
-       <li><a href="#">#546278: 24.01.2020</a></li>
-       <li><a href="#">#546278: 24.01.2020</a></li>
-       <li><a href="#">#546278: 24.01.2020</a></li>
-       <li><a href="#">#546278: 24.01.2020</a></li>
+
+				 {% for Installation in Installation_info %}
+       	  <li><a href="#">#{{Installation.id}}: {{Installation.date}}</a></li>
+			   {% endfor %}
+
 		 </ul>
      </div>
    </div>

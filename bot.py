@@ -3,6 +3,9 @@ import telebot
 import json
 import requests
 from keyboards import *
+import transliterate
+
+
 
 user_id=[]
 chat_id=[]
@@ -11,25 +14,20 @@ location=[]
 score=[]
 answers=[]
 
-# answers.append(answer)
 # tracking_menu[str(chat_id)]['posision']=answers
 # print(chat_id,tracking_menu[str(chat_id)]['posision'])
-# with open('tracking_menu.json', 'w') as file:
-#     json.dump(tracking_menu, file)
 
-
-with open('tracking_menu.json', 'r') as file:
+with open('BD.json', 'r') as file:
     tracking_menu = json.loads(file.read())
 
 bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
 
-def save_position(chat_id,answer):
-    len_pos=len(tracking_menu[str(chat_id)]['posision'])
-    if len_pos!=0:
-        tracking_menu[str(chat_id)]['posision']=answers
-    else:
-        pass
+def save_position(chat_id,answers):
+    tracking_menu['answers']=answers
+    with open('BD.json', 'w') as gap:
+        json.dump(tracking_menu, gap)
 
+# Вызов главного меню с кнопкой местоположения, а также стартового инлайн меню
 def main_menu(message):
     key = telebot.types.ReplyKeyboardMarkup(True,False)
     key.add(telebot.types.KeyboardButton('Отправить местоположение', request_location=True))
@@ -83,8 +81,17 @@ def callback_inline(call):
     to_menu=calback_data[1]
     answer=calback_data[2]
 
-    save_position(chat_id,answer)
     eval(to_menu+'(chat_id,to_menu)')
+    answers.append(answer)
+    print(answers)
+    print(transliterate.translit(answer, reversed=True))
+
+    if to_menu == 'to_main_menu':
+        print("if con")
+        save_position(chat_id,answers)
+        answers.clear()
+
+    print(answers)
 
     # try:
     #     eval(to_menu+'(chat_id,to_menu)')

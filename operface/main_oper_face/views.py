@@ -1,22 +1,40 @@
 from django.shortcuts import render
-
-# Create your views here.
+from .models  import Instalator,Installation
 
 def index(request):
-    # """
-    # Функция отображения для домашней страницы сайта.
-    # """
-    # # Генерация "количеств" некоторых главных объектов
-    # num_books=Book.objects.all().count()
-    # num_instances=BookInstance.objects.all().count()
-    # # Доступные книги (статус = 'a')
-    # num_instances_available=BookInstance.objects.filter(status__exact='a').count()
-    # num_authors=Author.objects.count()  # Метод 'all()' применен по умолчанию.
-    #
-    # # Отрисовка HTML-шаблона index.html с данными внутри
-    # # переменной контекста context
+    Instalators = Instalator.objects.order_by('name')
+    Installations = Installation.objects.order_by('id')
+    all_Instalator = []
+    all_Installation = []
+
+
+    for Instalator_index in Instalators:
+        Instalator_info = {
+            'chat_id': Instalator_index.chat_id,
+            'name': Instalator_index.name,
+            'score': Instalator_index.score,
+        }
+        all_Instalator.append(Instalator_info)
+
+    for Installation_index in Installations:
+        Installation_info = {
+            'id' : Installation_index.id,
+            'location' : Installation_index.location,
+            'Instalator_name' : Installation_index.Instalator_id.name,
+            'date' : Installation_index.date,
+            'answer' : Installation_index.answer,
+        }
+        all_Installation.append(Installation_info)
+
+
+    print(all_Instalator)
+    print(all_Installation)
+
     return render(
         request,
         'index.html',
-        #context={},
+        {
+        'Instalator_info':all_Instalator,
+        'Installation_info':all_Installation,
+        },
     )
