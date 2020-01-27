@@ -2,9 +2,14 @@
 import telebot
 import json
 import requests
+import datetime
 from keyboards import *
 import transliterate
+from queryToDataBase import *
+import sqlite3
 
+a = datetime.datetime.today().strftime("%Y%m%d")
+today = datetime.datetime.today()
 
 
 user_id=[]
@@ -31,13 +36,14 @@ def save_position(chat_id,answers):
 def main_menu(message):
     key = telebot.types.ReplyKeyboardMarkup(True,False)
     key.add(telebot.types.KeyboardButton('Отправить местоположение', request_location=True))
+    #print(message.from_user.id)
     # key.add(telebot.types.KeyboardButton('start_report', callback_data="yes"))
     # key.add('final_report')
 
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Стартовый отчёт", callback_data=str(message.chat.id) +" start_report"+" Стартовый-отчёт")
+    callback_button = telebot.types.InlineKeyboardButton(text="Старт отчёт", callback_data=str(message.chat.id) +" start_report"+" Старт-отчёт ")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Финальный отчёт", callback_data=str(message.chat.id) +" final_report")
+    callback_button = telebot.types.InlineKeyboardButton(text="Финальный отчёт", callback_data=str(message.chat.id) +" final_report"+" Финальный-отчёт ")
     inlineKey.add(callback_button)
 
     send = bot.send_message(message.chat.id, "Выберите вариант: ", reply_markup=inlineKey)
@@ -82,16 +88,18 @@ def callback_inline(call):
     answer=calback_data[2]
 
     eval(to_menu+'(chat_id,to_menu)')
-    answers.append(answer)
-    print(answers)
-    print(transliterate.translit(answer, reversed=True))
+    translit = transliterate.translit(answer, reversed=True)
+    answers.append(translit)
 
     if to_menu == 'to_main_menu':
         print("if con")
-        save_position(chat_id,answers)
+        datetime=today.strftime("%Y-%m-%d %H:%M:%S")
+        new_location=str(location).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
+        new_answers=str(answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
+        #save_position(chat_id,answers)
+        writeToDbJson(new_location, new_answers, int(chat_id), datetime)
         answers.clear()
-
-    print(answers)
+        location.clear()
 
     # try:
     #     eval(to_menu+'(chat_id,to_menu)')
@@ -105,12 +113,18 @@ def callback_inline(call):
  # Обработчик для документов и аудиофайлов
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
-    #photos=append()
-    print("фотка получена")
-    pass
+
+    file_info = bot.get_file(message.photo[len(message.photo)-1].file_id)
+    downloaded_file = bot.download_file(file_info.file_path)
+
+    src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+file_info.file_path;
+    with open(src, 'wb') as new_file:
+       new_file.write(downloaded_file)
+
 
 @bot.message_handler(content_types=['location'])
 def handle_loc(message):
+    print("location")
     payload = str(message.location.longitude) + ',' + str(message.location.latitude)
     url = 'https://geocode-maps.yandex.ru/1.x/?apikey=7b6e026e-a615-4157-a55c-9c7e9b90fa1a&format=json&geocode=' + payload
     r = requests.get(url)
@@ -118,5 +132,6 @@ def handle_loc(message):
     second=data['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['text']
     send = bot.send_message(message.chat.id, second)
     location.append(second)
+
 
 bot.polling(none_stop=True, interval=1)

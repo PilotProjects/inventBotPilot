@@ -27,7 +27,7 @@ def func6(chat_id,to_menu):
 
 def func5(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Необходимо сделать", callback_data=chat_id+" func6"+" Необходимо-сделать")
+    callback_button = telebot.types.InlineKeyboardButton(text="Необходимо сделать", callback_data=chat_id+" func6"+" Необходимо-сделат")
     inlineKey.add(callback_button)
     callback_button = telebot.types.InlineKeyboardButton(text="Присутствуют", callback_data=chat_id+" func6"+" Присутствуют")
     inlineKey.add(callback_button)
@@ -37,7 +37,7 @@ def func4(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
     callback_button = telebot.types.InlineKeyboardButton(text="Уже проложен", callback_data=chat_id+" func5"+" Уже-проложен")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Необходимо проложить", callback_data=chat_id+" func5"+" Необходимо-проложить")
+    callback_button = telebot.types.InlineKeyboardButton(text="Необходимо проложить", callback_data=chat_id+" func5"+" Необходимо-проложит")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Прокладка кабеля в помещении (сделать фото)', reply_markup=inlineKey)
 

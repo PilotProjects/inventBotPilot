@@ -3,19 +3,23 @@ import sqlite3 as lite
 import sys
 
 #функция записи начала смены в базу данных
-def writeToDbChangeTime(operatorname,begindatetime,finishdatetime):
+def writeToDbJson(location, answer, installator_id, date):
+
     try:
-        conn = lite.connect('data_writing.db')
+        conn = lite.connect('operface/db.sqlite3')
         cursor = conn.cursor()
-        cursor.executescript("INSERT INTO change_time (begin_datetime, finish_datetime, operator_name) VALUES ('%s','%s','%s')"%(begindatetime, finishdatetime, operatorname))
+        sql = "INSERT INTO main_oper_face_installation (id, location, answer, Instalator_id_id, date) VALUES (NULL ,'%s','%s','%i','%s')"%(location, answer, installator_id, date)
+        cursor.executescript(sql)
         conn.commit()
     except lite.Error:
         if conn:
             conn.rollback()
-        print ("Error")
+        print (lite.Error)
         sys.exit(1)
     finally:
+
         if conn:
+
             conn.close()
 
 
