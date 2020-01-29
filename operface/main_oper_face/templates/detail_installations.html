@@ -8,3 +8,12 @@
 {% endfor %}
 
 {% endblock %}
+
+
+{% block installations %}
+
+{% for Installation in Installation_info %}
+ <li><a href="../{{Installation.Instalator_id}}/{{Installation.id}} ">#{{Installation.id}}: {{Installation.date}}</a></li>
+{% endfor %}
+
+{% endblock %}

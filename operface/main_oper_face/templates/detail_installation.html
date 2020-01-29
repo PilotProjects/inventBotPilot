@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block instalator %}
+
+{% for Instalator in Instalator_info %}
+<li><a href="{% url 'main_oper_face:installations' Instalator.chat_id %}">{{Instalator.name}}</a></li>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block installations %}
+
+{% for Installation in Installation_info %}
+ <li><a href="../../{{Installation.Instalator_id}}/{{Installation.id}}">#{{Installation.id}}: {{Installation.date}}</a></li>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block installation %}
+
+<h2>Инсталлятор: {{detail_info.Instalator_name}} </h2>
+<h4>Исталляция: #{{detail_info.id}}</h4>
+<h4>Адрес: {{detail_info.location}}</h4>
+
+{% endblock %}
+
+{% block detail_info %}
+
+<li>Состояние ОКР? <strong>{{answer.one}}</strong></li>
+<li>Проложен ли кабель в подъезде абонента? <strong>{{answer.two}}</strong> </li>
+<li>Вводное отверстие <strong>{{answer.three}}</strong></li>
+<li>Прокладка кабеля в помещении <strong>{{answer.four}}</strong></li>
+<li>Дополнительные отверстия в помещении <strong>{{answer.five}}</strong></li>
+<li>Абонентское оборудование в наличие? <strong>{{answer.six}}</strong></li>
+
+{% endblock %}

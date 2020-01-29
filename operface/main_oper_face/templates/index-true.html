@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>operface</title>
+	{% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="flex-cont">
+   <div class="flex-box">
+     <div class="user-list">
+       <ul>
+
+				 {% for Instalator in Instalator_info %}
+         <li><a href="#">{{Instalator.name}}</a></li>
+				 {% endfor %}
+
+       </ul>
+     </div>
+   </div>
+   <div class="flex-box">
+     <div class="inst-list">
+			 <ul>
+
+				 {% for Installation in Installation_info %}
+       	  <li><a href="#">#{{Installation.id}}: {{Installation.date}}</a></li>
+			   {% endfor %}
+
+		 </ul>
+     </div>
+   </div>
+   <div class="flex-box">
+     <div class="init-user">
+       <h2>Инсталлятор: {{Installation_info.Instalator_name}}</h2>
+       <h4>Исталляция: #546278</h4>
+       <h4>Адрес: Лермонтова 83</h4>
+     </div>
+		 <div class="info-user">
+     <div class="flex-inst-block">
+			 <h2>Стартовый отчет</h2>
+			 <hr>
+       <h4>Ответы:</h4>
+			 <ul>
+       <li>Состояние ОКР </li>
+			 <li>Проложен ли кабель в подъезде абонента? </li>
+			 <li>Вводное отверстие </li>
+			 <li>Прокладка кабеля в помещении </li>
+			 <li>Дополнительные отверстия в помещении </li>
+			 <li>Абонентское оборудование в наличие? </li>
+		 </ul>
+		  <hr>
+			<h4>Фото:</h4>
+
+			<img src="{% static 'img/1.jpg' %}" >
+ 		 <img src="{% static 'img/2.jpg' %}" >
+		 <img src="{% static 'img/3.jpg' %}" >
+			<hr>
+			<h4>Предварительные бонусы: 30</h4>
+     </div>
+     <div class="flex-inst-block">
+			 <h2>Финальный отчет</h2>
+ 			<hr>
+ 			<h4>Ответы:</h4>
+ 			<ul>
+ 			<li>Состояние ОКР </li>
+ 			<li>Проложен ли кабель в подъезде абонента? </li>
+ 			<li>Вводное отверстие </li>
+			<li>Прокладка кабеля в помещении </li>
+			<li>Дополнительные отверстия в помещении </li>
+			<li>Абонентское оборудование в наличие? </li>
+ 		</ul>
+ 		 <hr>
+ 		 <h4>Фото:</h4>
+		 <img src="{% static 'img/1.jpg' %}">
+		<img src="{% static 'img/2.jpg' %}" >
+		<img src="{% static 'img/3.jpg' %}">
+ 		 <hr>
+ 		 <h4>Начисленные бонусы: 35</h4>
+		 <textarea name="oper-comment" class="oper-comment">Замечания:</textarea>
+			 <input type="submit" value="Отправить">
+ 		</div>
+     </div>
+   </div>
+  </div>
+</body>
+</html>

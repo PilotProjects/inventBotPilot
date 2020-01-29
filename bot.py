@@ -2,14 +2,20 @@
 import telebot
 import json
 import requests
-import datetime
+import datetime as d
+import os
 from keyboards import *
 import transliterate
 from queryToDataBase import *
 import sqlite3
 
-a = datetime.datetime.today().strftime("%Y%m%d")
-today = datetime.datetime.today()
+
+
+def  get_datetime():
+    a = d.datetime.today().strftime("%Y%m%d")
+    today = d.datetime.today()
+    datetime=today.strftime("%Y-%m-%d %H:%M:%S")
+    return datetime
 
 
 user_id=[]
@@ -57,6 +63,7 @@ def main_menu(message):
 
 ##### Функции для начало отчёта и конца отчёта, тут нужно нарисовать инлайн кнопки #####
 def start_report(chat_id,to_menu):
+    location.clear()
     print("start")
     yes_no(chat_id,to_menu,'start')
 
@@ -93,11 +100,10 @@ def callback_inline(call):
 
     if to_menu == 'to_main_menu':
         print("if con")
-        datetime=today.strftime("%Y-%m-%d %H:%M:%S")
         new_location=str(location).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
         new_answers=str(answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
         #save_position(chat_id,answers)
-        writeToDbJson(new_location, new_answers, int(chat_id), datetime)
+        writeToDbJson(new_location, new_answers, int(chat_id), get_datetime())
         answers.clear()
         location.clear()
 
@@ -113,14 +119,23 @@ def callback_inline(call):
  # Обработчик для документов и аудиофайлов
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
-
+    print("get photo")
     file_info = bot.get_file(message.photo[len(message.photo)-1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
+    list_of_dir=os.listdir('/home/tester-vmn/projects/inventBotPilot/instal_photo/')
 
-    src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+file_info.file_path+" user_id "+str(message.from_user.id)
-    with open(src, 'wb') as new_file:
-       new_file.write(downloaded_file)
-
+    if str(message.from_user.id) not in list_of_dir:
+        print("no exist")
+        os.mkdir('/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id))
+        src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id)+'/'+get_datetime()
+        with open(src, 'wb') as new_file:
+           new_file.write(downloaded_file)
+    else:
+        print("exist")
+        src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id)+'/'+get_datetime()
+        with open(src, 'wb') as new_file:
+           new_file.write(downloaded_file)
+    bot.send_message(message.chat.id, "фото сохранено")
 
 @bot.message_handler(content_types=['location'])
 def handle_loc(message):
