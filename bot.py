@@ -14,7 +14,7 @@ import sqlite3
 def  get_datetime():
     a = d.datetime.today().strftime("%Y%m%d")
     today = d.datetime.today()
-    datetime=today.strftime("%Y-%m-%d %H:%M:%S")
+    datetime=today.strftime("%Y-%m-%d-%H-%M-%S")
     return datetime
 
 
@@ -24,6 +24,7 @@ photos=[]
 location=[]
 score=[]
 answers=[]
+photos_list=[]
 
 # tracking_menu[str(chat_id)]['posision']=answers
 # print(chat_id,tracking_menu[str(chat_id)]['posision'])
@@ -103,9 +104,10 @@ def callback_inline(call):
         new_location=str(location).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
         new_answers=str(answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
         #save_position(chat_id,answers)
-        writeToDbJson(new_location, new_answers, int(chat_id), get_datetime())
+        writeToDbJson(new_location, new_answers, int(chat_id), get_datetime(), photos_list[0], photos_list[1], photos_list[2], photos_list[3], photos_list[4])
         answers.clear()
         location.clear()
+        photos_list.clear()
 
     # try:
     #     eval(to_menu+'(chat_id,to_menu)')
@@ -122,19 +124,24 @@ def handle_photo(message):
     print("get photo")
     file_info = bot.get_file(message.photo[len(message.photo)-1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
-    list_of_dir=os.listdir('/home/tester-vmn/projects/inventBotPilot/instal_photo/')
+    list_of_dir=os.listdir('/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/')
 
     if str(message.from_user.id) not in list_of_dir:
         print("no exist")
-        os.mkdir('/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id))
-        src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id)+'/'+get_datetime()
+        os.mkdir('/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/'+str(message.from_user.id))
+        src='/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/'+str(message.from_user.id)+'/'+get_datetime()+'.jpg'
         with open(src, 'wb') as new_file:
            new_file.write(downloaded_file)
+        photos_list.append(src.replace('/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/',''))
     else:
         print("exist")
-        src='/home/tester-vmn/projects/inventBotPilot/instal_photo/'+str(message.from_user.id)+'/'+get_datetime()
+        src='/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/'+str(message.from_user.id)+'/'+get_datetime()+'.jpg'
+        print(src)
         with open(src, 'wb') as new_file:
            new_file.write(downloaded_file)
+        photos_list.append(src.replace('/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/photos_instal/',''))
+
+    print(photos_list)
     bot.send_message(message.chat.id, "фото сохранено")
 
 @bot.message_handler(content_types=['location'])

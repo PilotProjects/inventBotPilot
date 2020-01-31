@@ -121,3 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#STATIC_ROOT = '/home/tester-vmn/projects/inventBotPilot/operface/main_oper_face/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_oper_face/static/photos_instal')
+MEDIA_URL = '/photos_instal/'

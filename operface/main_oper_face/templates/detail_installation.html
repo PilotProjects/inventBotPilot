@@ -27,13 +27,66 @@
 
 {% endblock %}
 
-{% block detail_info %}
+{% block start_detail_info %}
+<li>Клиент желает настроить своё оборудование? <strong>{{answer.one}}</strong></li>
+<li>Выполнена ли проводка кабеля в подъезде? (сделать фото) <strong>{{answer.two}}</strong> </li>
+<li>Необходимо ли проделать доп. отверстие для ввода кабеля в жилое помещение? (сделать фото) <strong>{{answer.three}}</strong></li>
+<li>Необходимо ли проделать доп. отверстие в помещении? (сделать фото) <strong>{{answer.four}}</strong></li>
+<li>Абонент хочет воспользоваться PLC адаптером? <strong>{{answer.five}}</strong></li>
+<li>Расположение точки доступа Wi-Fi <strong>{{answer.six}}</strong></li>
+<li>Клиенту необходима вторая ТВ приставка? <strong></strong></li>
+{% endblock %}
 
-<li>Состояние ОКР? <strong>{{answer.one}}</strong></li>
-<li>Проложен ли кабель в подъезде абонента? <strong>{{answer.two}}</strong> </li>
-<li>Вводное отверстие <strong>{{answer.three}}</strong></li>
-<li>Прокладка кабеля в помещении <strong>{{answer.four}}</strong></li>
-<li>Дополнительные отверстия в помещении <strong>{{answer.five}}</strong></li>
-<li>Абонентское оборудование в наличие? <strong>{{answer.six}}</strong></li>
+{% block fin_detail_info %}
+<li>Логин и пароль от Wi-Fi сети наклеен на оборудование?(сделать фото) </li>
+<li>Продемонстрирована работоспособность всех услуг? </li>
+<li>Абонент ознакомлен с основными моментами пользования Интернет, IPTV, OTA? </li>
+<li>Произведена настройка пульта дист. управления STB? </li>
+<li>Клиент ознакомлен с доп. сервисами и функциями ИТВ? </li>
+<li>Продемонстрирована скорость подключения?(сделать фото) </li>
+<li>Абонент зарегестрирован в личном кабинете? </li>
+{% endblock %}
+
+
+{% block start_photos %}
+
+<a href="#img1">
+  <img src="{{detail_info.photo_1.url}}" class="thumbnail">
+</a>
+<a href="#_" class="lightbox" id="img1">
+  <img src="{{detail_info.photo_1.url}}">
+</a>
+<a href="#img1">
+  <img src="{{detail_info.photo_2.url}}" class="thumbnail">
+</a>
+<a href="#_" class="lightbox" id="img1">
+  <img src="{{detail_info.photo_2.url}}">
+</a>
+<a href="#img1">
+  <img src="{{detail_info.photo_3.url}}" class="thumbnail">
+</a>
+<a href="#_" class="lightbox" id="img1">
+  <img src="{{detail_info.photo_3.url}}">
+</a>
+
+{% endblock %}
+
+
+{% block fin_photos %}
+
+
+<a href="#img1">
+  <img src="{{detail_info.photo_4.url}}" class="thumbnail">
+</a>
+<a href="#_" class="lightbox" id="img1">
+  <img src="{{detail_info.photo_4.url}}">
+</a>
+<a href="#img1">
+  <img src="{{detail_info.photo_5.url}}" class="thumbnail">
+</a>
+<a href="#_" class="lightbox" id="img1">
+  <img src="{{detail_info.photo_5.url}}">
+</a>
+
 
 {% endblock %}

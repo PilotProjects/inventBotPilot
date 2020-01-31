@@ -26,4 +26,6 @@ from django.conf.urls.static import static
 urlpatterns = [
 path('admin/', admin.site.urls),
 path('main_oper_face/', include('main_oper_face.urls')),
-path('',RedirectView.as_view(url='/main_oper_face/', permanent=True)),] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+path('',RedirectView.as_view(url='/main_oper_face/', permanent=True)),] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#+ media(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#urlpatterns=+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

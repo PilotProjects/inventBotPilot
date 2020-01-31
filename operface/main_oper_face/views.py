@@ -19,7 +19,6 @@ def show_all_installators():
 def show_all_selected_installations(chat_id):
     try:
         detail_installations = Installation.objects.filter(Instalator_id = chat_id)
-        print(detail_installations)
     except:
         raise Http404("installations of this instalator not found")
 
@@ -46,8 +45,14 @@ def show_selected_installation(id):
             'Instalator_id' : detail_installation.Instalator_id.chat_id,
             'date' : detail_installation.date,
             'location' : detail_installation.location,
+            'photo_1' : detail_installation.photo_1,
+            'photo_2' : detail_installation.photo_2,
+            'photo_3' : detail_installation.photo_3,
+            'photo_4' : detail_installation.photo_4,
+            'photo_5' : detail_installation.photo_5,
         }
-        answer = detail_installation.answer,
+        answer = detail_installation.answer
+        print(detail_info)
     except:
         raise Http404("selected installation not found")
 
@@ -64,6 +69,11 @@ def show_selected_installation(id):
     except:
         raise Http404("not answer")
     return(detail_info,detail_answer)
+
+    # try:
+    #     for i in range(1,6):
+
+
 
 
 
