@@ -29,6 +29,12 @@ ul li {
   font-size: 1rem;
   list-style: none;
   padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  list-style: decimal;
+}
+.inst-list ul li:hover,.user-list ul li:hover{
+  font-size: 1.1rem;
 }
 
 .user-list ul li:nth-child(2n+1) {
@@ -38,6 +44,11 @@ ul li {
 .inst-list ul li:nth-child(2n+1) {
   background: #EEF1F4;
 }
+.flex-inst-block ul li:nth-child(2n+1) {
+  background: #EEF1F4;
+
+}
+
 .flex-cont {
  display: flex;
  justify-content: space-between;

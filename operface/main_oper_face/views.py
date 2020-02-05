@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from .models  import Instalator,Installation
 
+from transliterate import translit, get_available_language_codes
 
 def show_all_installators():
     Instalators = Instalator.objects.order_by('name')
@@ -30,10 +31,17 @@ def show_all_selected_installations(chat_id):
             'Instalator_name' : Installation_index.Instalator_id.name,
             'Instalator_id' : Installation_index.Instalator_id.chat_id,
             'date' : Installation_index.date,
-            'answer' : Installation_index.answer,
+        #    'answer' : Installation_index.answer,
         }
         all_Installation.append(Installation_info)
     return(all_Installation)
+
+
+
+def custom_translite(answer_list):
+    for index in range(0,len(answer_list)):
+        answer_list[index] = translit(answer_list[index], 'ru')
+    return(answer_list)
 
 def show_selected_installation(id):
     try:
@@ -43,6 +51,7 @@ def show_selected_installation(id):
             'location' : detail_installation.location,
             'Instalator_name' : detail_installation.Instalator_id.name,
             'Instalator_id' : detail_installation.Instalator_id.chat_id,
+            'Instalator_score' : detail_installation.Instalator_id.score,
             'date' : detail_installation.date,
             'location' : detail_installation.location,
             'photo_1' : detail_installation.photo_1,
@@ -51,30 +60,40 @@ def show_selected_installation(id):
             'photo_4' : detail_installation.photo_4,
             'photo_5' : detail_installation.photo_5,
         }
-        answer = detail_installation.answer
-        print(detail_info)
+        start_answer = detail_installation.start_answer
+        finish_answer = detail_installation.finish_answer
     except:
         raise Http404("selected installation not found")
 
     try:
-        answer = str(answer).replace("("," ").replace(")"," ").replace(","," ").replace("'"," ")[3:][:-4].split('  ')
+        start_answer = custom_translite(str(start_answer).replace("start_","")[1:][:-1].split('  '))
+        finish_answer = custom_translite(str(finish_answer).replace("final_","")[1:][:-1].split('  '))
+
+        detail_start_answer = {
+            'one' : start_answer[0],
+            'two' : start_answer[1],
+            'three' : start_answer[2],
+            'four' : start_answer[3],
+            'five' : start_answer[4],
+            'six' : start_answer[5],
+            'seven' : start_answer[6],
+        }
+        detail_finish_answer = {
+            'one' : finish_answer[0],
+            'two' : finish_answer[1],
+            'three' : finish_answer[2],
+            'four' : finish_answer[3],
+            'five' : finish_answer[4],
+            'six' : finish_answer[5],
+            'seven' : start_answer[6],
+        }
         detail_answer = {
-            'one' : answer[1],
-            'two' : answer[2],
-            'three' : answer[3],
-            'four' : answer[4],
-            'five' : answer[5],
-            'six' : answer[6],
+            'start' : detail_start_answer,
+            'final' : detail_finish_answer,
         }
     except:
         raise Http404("not answer")
     return(detail_info,detail_answer)
-
-    # try:
-    #     for i in range(1,6):
-
-
-
 
 
 def index(request):

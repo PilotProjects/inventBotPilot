@@ -21,30 +21,30 @@
 
 {% block installation %}
 
-<h2>Инсталлятор: {{detail_info.Instalator_name}} </h2>
+<h2>Инсталлятор: {{detail_info.Instalator_name}} ({{detail_info.Instalator_score}} Б.)</h2>
 <h4>Исталляция: #{{detail_info.id}}</h4>
 <h4>Адрес: {{detail_info.location}}</h4>
 
 {% endblock %}
 
 {% block start_detail_info %}
-<li>Клиент желает настроить своё оборудование? <strong>{{answer.one}}</strong></li>
-<li>Выполнена ли проводка кабеля в подъезде? (сделать фото) <strong>{{answer.two}}</strong> </li>
-<li>Необходимо ли проделать доп. отверстие для ввода кабеля в жилое помещение? (сделать фото) <strong>{{answer.three}}</strong></li>
-<li>Необходимо ли проделать доп. отверстие в помещении? (сделать фото) <strong>{{answer.four}}</strong></li>
-<li>Абонент хочет воспользоваться PLC адаптером? <strong>{{answer.five}}</strong></li>
-<li>Расположение точки доступа Wi-Fi <strong>{{answer.six}}</strong></li>
-<li>Клиенту необходима вторая ТВ приставка? <strong></strong></li>
+<li>Клиент желает настроить своё оборудование? <strong>{{answer.start.one}}</strong></li>
+<li>Выполнена ли проводка кабеля в подъезде? (сделать фото) <strong>{{answer.start.two}}</strong> </li>
+<li>Необходимо ли проделать доп. отверстие для ввода кабеля в жилое помещение? (сделать фото) <strong>{{answer.start.three}}</strong></li>
+<li>Необходимо ли проделать доп. отверстие в помещении? (сделать фото) <strong>{{answer.start.four}}</strong></li>
+<li>Абонент хочет воспользоваться PLC адаптером? <strong>{{answer.start.five}}</strong></li>
+<li>Расположение точки доступа Wi-Fi определил <strong>{{answer.start.six}}</strong></li>
+<li>Клиенту необходима вторая ТВ приставка? <strong>{{answer.start.seven}}</strong></li>
 {% endblock %}
 
 {% block fin_detail_info %}
-<li>Логин и пароль от Wi-Fi сети наклеен на оборудование?(сделать фото) </li>
-<li>Продемонстрирована работоспособность всех услуг? </li>
-<li>Абонент ознакомлен с основными моментами пользования Интернет, IPTV, OTA? </li>
-<li>Произведена настройка пульта дист. управления STB? </li>
-<li>Клиент ознакомлен с доп. сервисами и функциями ИТВ? </li>
-<li>Продемонстрирована скорость подключения?(сделать фото) </li>
-<li>Абонент зарегестрирован в личном кабинете? </li>
+<li>Логин и пароль от Wi-Fi сети наклеен на оборудование?(сделать фото) <strong>{{answer.final.one}}</strong></li>
+<li>Продемонстрирована работоспособность всех услуг? <strong>{{answer.final.two}}</strong></li>
+<li>Абонент ознакомлен с основными моментами пользования Интернет, IPTV, OTA? <strong>{{answer.final.three}}</strong></li>
+<li>Произведена настройка пульта дист. управления STB? <strong>{{answer.final.four}}</strong></li>
+<li>Клиент ознакомлен с доп. сервисами и функциями ИТВ? <strong>{{answer.final.five}}</strong></li>
+<li>Продемонстрирована скорость подключения?(сделать фото) <strong>{{answer.final.six}}</strong></li>
+<li>Абонент зарегестрирован в личном кабинете? <strong>{{answer.final.seven}}</strong></li>
 {% endblock %}
 
 
@@ -56,16 +56,16 @@
 <a href="#_" class="lightbox" id="img1">
   <img src="{{detail_info.photo_1.url}}">
 </a>
-<a href="#img1">
+<a href="#img2">
   <img src="{{detail_info.photo_2.url}}" class="thumbnail">
 </a>
-<a href="#_" class="lightbox" id="img1">
+<a href="#_" class="lightbox" id="img2">
   <img src="{{detail_info.photo_2.url}}">
 </a>
-<a href="#img1">
+<a href="#img3">
   <img src="{{detail_info.photo_3.url}}" class="thumbnail">
 </a>
-<a href="#_" class="lightbox" id="img1">
+<a href="#_" class="lightbox" id="img3">
   <img src="{{detail_info.photo_3.url}}">
 </a>
 
@@ -75,16 +75,16 @@
 {% block fin_photos %}
 
 
-<a href="#img1">
+<a href="#img4">
   <img src="{{detail_info.photo_4.url}}" class="thumbnail">
 </a>
-<a href="#_" class="lightbox" id="img1">
+<a href="#_" class="lightbox" id="img4">
   <img src="{{detail_info.photo_4.url}}">
 </a>
-<a href="#img1">
+<a href="#img5">
   <img src="{{detail_info.photo_5.url}}" class="thumbnail">
 </a>
-<a href="#_" class="lightbox" id="img1">
+<a href="#_" class="lightbox" id="img5">
   <img src="{{detail_info.photo_5.url}}">
 </a>
 

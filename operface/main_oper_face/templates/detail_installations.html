@@ -11,9 +11,19 @@
 
 
 {% block installations %}
+  {% if Installation_info%}
+    {% for Installation in Installation_info %}
+     <li><a href="../{{Installation.Instalator_id}}/{{Installation.id}} ">#{{Installation.id}}: {{Installation.date}}</a></li>
+    {% endfor %}
+  {% else %}
+    <strong>Пока нет инсталяций</strong>
+  {% endif %}
 
-{% for Installation in Installation_info %}
- <li><a href="../{{Installation.Instalator_id}}/{{Installation.id}} ">#{{Installation.id}}: {{Installation.date}}</a></li>
-{% endfor %}
+{% endblock %}
+
+
+{% block start_detail_info %}
+
+    <strong>ТУТ МОГЛА БЫТЬ ВАША РЕКЛАМА</strong>
 
 {% endblock %}

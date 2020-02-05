@@ -18,13 +18,14 @@ class Installation(models.Model):
     location = models.CharField('Местоположение', max_length=200)
     date = models.CharField('Время' , max_length=200)
     #time = models.TimeField()
-    answer = models.TextField('Ответы на вопросы')
+    start_answer = models.TextField('Стартовый отчет')
+    finish_answer = models.TextField('Финальный отчет')
     photo_1 = models.ImageField('Выполнена ли проводка кабеля в подъезде?' , upload_to='main_oper_face/static')
     photo_2 = models.ImageField('Необходимо ли проделать доп. отверстие для ввода кабеля в жилое помещение?' , upload_to='main_oper_face/static')
     photo_3 = models.ImageField('Необходимо ли проделать доп отверстие в помещении?' , upload_to='main_oper_face/static')
     photo_4 = models.ImageField('Логин и пароль от Wi-Fi сети наклеен на оборудование?' , upload_to='main_oper_face/static')
     photo_5 = models.ImageField('Продемонстрирована скорость подключения?' , upload_to='main_oper_face/static')
-    
+
 
 
     def __str__(self):

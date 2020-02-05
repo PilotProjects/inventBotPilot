@@ -23,7 +23,8 @@ chat_id=[]
 photos=[]
 location=[]
 score=[]
-answers=[]
+start_answers=[]
+final_answers=[]
 photos_list=[]
 
 # tracking_menu[str(chat_id)]['posision']=answers
@@ -43,26 +44,14 @@ def save_position(chat_id,answers):
 def main_menu(message):
     key = telebot.types.ReplyKeyboardMarkup(True,False)
     key.add(telebot.types.KeyboardButton('Отправить местоположение', request_location=True))
-    #print(message.from_user.id)
-    # key.add(telebot.types.KeyboardButton('start_report', callback_data="yes"))
-    # key.add('final_report')
 
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Старт отчёт", callback_data=str(message.chat.id) +" start_report"+" Старт-отчёт ")
+    callback_button = telebot.types.InlineKeyboardButton(text="Стартовый отчёт", callback_data=str(message.chat.id) +" start_report"+" Старт-отчёт ")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Финальный отчёт", callback_data=str(message.chat.id) +" final_report"+" Финальный-отчёт ")
-    inlineKey.add(callback_button)
-
-    send = bot.send_message(message.chat.id, "Выберите вариант: ", reply_markup=inlineKey)
+    send = bot.send_message(message.chat.id, "==================", reply_markup=inlineKey)
     send = bot.send_message(message.chat.id, "==================", reply_markup=key)
 
-    # tracking_menu[str(message.chat.id)]['posision']=gap
-    # with open('tracking_menu.json', 'w') as file:
-    #     json.dump(tracking_menu, file)
-
-
-
-##### Функции для начало отчёта и конца отчёта, тут нужно нарисовать инлайн кнопки #####
+##### Функции для начало отчёта и конца отчёта #####
 def start_report(chat_id,to_menu):
     location.clear()
     print("start")
@@ -83,9 +72,12 @@ def handle_start_help(message):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     to_menu=message.text
-    #now_menu=tracking_menu[str(message.chat.id)]['posision']
-    print(message.text)
-    eval(to_menu+'(message)')
+
+    if to_menu == 'start_final_report':
+        final_report(str(message.chat.id),to_menu)
+    elif to_menu == 'main_menu':
+        main_menu(message)
+
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -97,17 +89,29 @@ def callback_inline(call):
 
     eval(to_menu+'(chat_id,to_menu)')
     translit = transliterate.translit(answer, reversed=True)
-    answers.append(translit)
+
+    if answer[0:6:1] == 'start_':
+        start_answers.append(translit)
+    elif answer[0:6:1] == 'final_':
+        final_answers.append(translit)
 
     if to_menu == 'to_main_menu':
         print("if con")
         new_location=str(location).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
-        new_answers=str(answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
-        #save_position(chat_id,answers)
-        writeToDbJson(new_location, new_answers, int(chat_id), get_datetime(), photos_list[0], photos_list[1], photos_list[2], photos_list[3], photos_list[4])
-        answers.clear()
+
+        new_start_answers=str(start_answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
+        new_final_answers=str(final_answers).replace("'"," ").replace("["," ").replace(","," ").replace("]"," ").replace("  "," ")
+
+        print(new_start_answers)
+        print(new_final_answers)
+        writeToDbJson(new_location, new_start_answers, new_final_answers,int(chat_id), get_datetime(), photos_list[0], photos_list[1], photos_list[2], photos_list[3], photos_list[4])
+
+        start_answers.clear()
+        final_answers.clear()
+
         location.clear()
         photos_list.clear()
+
 
     # try:
     #     eval(to_menu+'(chat_id,to_menu)')

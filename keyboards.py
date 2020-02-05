@@ -13,82 +13,73 @@ def to_main_menu(chat_id,to_menu):
     key.add(telebot.types.KeyboardButton('main_menu'))
     send = bot.send_message(chat_id, "Чтобы отправить данные нажмите  'main_menu' ", reply_markup=key)
 
-def start_final_report(chat_id,to_menu):
-    func1_fin(chat_id,to_menu)
-    # key = telebot.types.ReplyKeyboardMarkup(True,False)
-    # key.add(telebot.types.KeyboardButton('main_menu'))
-    # send = bot.send_message(chat_id, "Чтобы отправить данные нажмите  'main_menu' ", reply_markup=key)
+def final(chat_id,to_menu):
+    key = telebot.types.ReplyKeyboardMarkup(True,False)
+    key.add(telebot.types.KeyboardButton('start_final_report'))
+    send = bot.send_message(chat_id, "Чтоб начать стартовый отчёт нажмите 'start_final_report' ", reply_markup=key)
 
 ############НАЧАЛЬНЫЙ ОТЧЁТ############
 
 def func7(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" start_final_report"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" final"+" start_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" to_main_menu"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" final"+" start_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Клиенту необходима вторая ТВ приставка?', reply_markup=inlineKey)
 
 def func6(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Определил абонент", callback_data=chat_id+" func7"+" Определил абонент")
+    callback_button = telebot.types.InlineKeyboardButton(text="Определил абонент", callback_data=chat_id+" func7"+" start_абонент")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Определил инсталлятор", callback_data=chat_id+" func7"+" Определил инсталлятор")
+    callback_button = telebot.types.InlineKeyboardButton(text="Определил инсталлятор", callback_data=chat_id+" func7"+" start_инсталлятор")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Расположение точки доступа Wi-Fi', reply_markup=inlineKey)
 
 def func5(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func6"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func6"+" start_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func6"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func6"+" start_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Абонент хочет воспользоваться PLC адаптером?', reply_markup=inlineKey)
 
 def func4(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func5"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func5"+" start_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func5"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func5"+" start_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Необходимо ли проделать доп. отверстие в помещении? (сделать фото)', reply_markup=inlineKey)
 
 def func3(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func4"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func4"+" start_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func4"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func4"+" start_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Необходимо ли проделать доп. отверстие для ввода кабеля в жилое помещение? (сделать фото)', reply_markup=inlineKey)
 
 
 def func2(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Выполнена с коробом", callback_data=chat_id+" func3"+" Выполнена с коробом")
+    callback_button = telebot.types.InlineKeyboardButton(text="Выполнена с коробом", callback_data=chat_id+" func3"+" start_Выполнена с коробом")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Выполнена без короба", callback_data=chat_id+" func3"+" Выполнена без короба")
+    callback_button = telebot.types.InlineKeyboardButton(text="Выполнена без короба", callback_data=chat_id+" func3"+" start_Выполнена без короба")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет проводки кабеля", callback_data=chat_id+" func3"+" Нет проводки кабеля")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет проводки кабеля", callback_data=chat_id+" func3"+" start_Нет проводки кабеля")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Выполнена ли проводка кабеля в подъезде? (сделать фото)', reply_markup=inlineKey)
 
 
 def func1(chat_id,to_menu):
-    print("func1_1")
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    print("func1_2")
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func2"+" Да")
-    print("func1_3")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func2"+" start_Да")
     inlineKey.add(callback_button)
-    print("func1_4")
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет (оборудование РТ)", callback_data=chat_id+" func2"+" Нет (оборудование РТ)")
-    print("func1_5")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет (оборудование РТ)", callback_data=chat_id+" func2"+" start_оборудование РТ")
     inlineKey.add(callback_button)
-    print("func1_6")
-    callback_button = telebot.types.InlineKeyboardButton(text="Невозможно настроить оборудование", callback_data=chat_id+" func2"+" Невозможно настроить оборудование")
-    print("func1_7")
+    callback_button = telebot.types.InlineKeyboardButton(text="Невозможно настроить оборудование", callback_data=chat_id+" func2"+" start_Невозможно настроить")
     inlineKey.add(callback_button)
-    print("func1_8",inlineKey)
     bot.send_message(chat_id,'Клиент желает настроить своё оборудование?', reply_markup=inlineKey)
 
 # def main_menu(message):
@@ -115,41 +106,65 @@ def yes_no(chat_id,to_menu,report):
 
 
 ############КОНЕЧНЫЙ ОТЧЁТ############
+def func7_fin(chat_id,to_menu):
+    inlineKey = telebot.types.InlineKeyboardMarkup()
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" to_main_menu"+" final_Да")
+    inlineKey.add(callback_button)
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" to_main_menu"+" final_Нет")
+    inlineKey.add(callback_button)
+    bot.send_message(chat_id,'Абонент зарегестрирован в личном кабинете?', reply_markup=inlineKey)
+
+def func6_fin(chat_id,to_menu):
+    inlineKey = telebot.types.InlineKeyboardMarkup()
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func7_fin"+" final_Да")
+    inlineKey.add(callback_button)
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func7_fin"+" final_Нет")
+    inlineKey.add(callback_button)
+    bot.send_message(chat_id,'Продемонстрирована скорость подключения?(сделать фото)', reply_markup=inlineKey)
+
+
+def func5_fin(chat_id,to_menu):
+    inlineKey = telebot.types.InlineKeyboardMarkup()
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func6_fin"+" final_Да")
+    inlineKey.add(callback_button)
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func6_fin"+" final_Нет")
+    inlineKey.add(callback_button)
+    bot.send_message(chat_id,'Клиент ознакомлен с доп. сервисами и функциями ИТВ?', reply_markup=inlineKey)
+
 def func4_fin(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" to_main_menu"+" yes")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func5_fin"+" final_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" to_main_menu"+" no")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func5_fin"+" final_Нет")
     inlineKey.add(callback_button)
-    bot.send_message(chat_id,'Прокладка кабеля? (сделать фото)', reply_markup=inlineKey)
+    bot.send_message(chat_id,'Произведена настройка пульта дист. управления STB?', reply_markup=inlineKey)
 
 
 def func3_fin(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func4_fin"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func4_fin"+" final_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func4_fin"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func4_fin"+" final_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Абонент ознакомлен с основными моментами пользования Интернет, IPTV, OTA?', reply_markup=inlineKey)
 
 
 def func2_fin(chat_id,to_menu):
     inlineKey = telebot.types.InlineKeyboardMarkup()
-    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func3_fin"+" Да")
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func3_fin"+" final_Да")
     inlineKey.add(callback_button)
-    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func3_fin"+" Нет")
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func3_fin"+" final_Нет")
     inlineKey.add(callback_button)
     bot.send_message(chat_id,'Продемонстрирована работоспособность всех услуг?', reply_markup=inlineKey)
 
 
 def func1_fin(chat_id,to_menu):
-    print("финальный первая функция")
-    # inlineKey = telebot.types.InlineKeyboardMarkup()
-    # callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func2_fin"+" Да")
-    # inlineKey.add(callback_button)
-    # callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func2_fin"+" Нет")
-    # inlineKey.add(callback_button)
-    # bot.send_message(chat_id,'Логин и пароль от Wi-Fi сети наклеен на оборудование?(сделать фото)', reply_markup=inlineKey)
+    inlineKey = telebot.types.InlineKeyboardMarkup()
+    callback_button = telebot.types.InlineKeyboardButton(text="Да", callback_data=chat_id+" func2_fin"+" final_Да")
+    inlineKey.add(callback_button)
+    callback_button = telebot.types.InlineKeyboardButton(text="Нет", callback_data=chat_id+" func2_fin"+" final_Нет")
+    inlineKey.add(callback_button)
+    bot.send_message(chat_id,'Логин и пароль от Wi-Fi сети наклеен на оборудование?(сделать фото)', reply_markup=inlineKey)
 
 
 # def main_menu(message):
